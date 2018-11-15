@@ -1,2 +1,2 @@
 // MODULE
-var app = angular.module('videoApp', ['ngRoute', 'ngResource']);
+var app = angular.module('videoApp', ['ngRoute', 'ngResource', 'ngSanitize']);
