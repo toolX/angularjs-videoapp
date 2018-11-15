@@ -16,7 +16,9 @@ app.directive('videoList', function () {
     templateUrl: 'directives/videoList.html',
     replace: true,
     scope: {
-      videoList: '='
+      videoList: '=',
+      onSelect: '&',
+      applyClass: '&'
     }
   }
 });

@@ -1,6 +1,8 @@
 <ul class="nav flex-column nav-pills">
   <li class="nav-item mb-2" ng-repeat="video in videoList">
-    <a class="nav-link"
-      href="#">{{video.title}}</a>
+    <a class="nav-link {{activeClass}}"
+      ng-class="applyClass({ video: video })"
+      ng-click="onSelect({ video: video })"
+      href="#">{{video.title}} {{activeClass}}</a>
   </li>
 </ul>
