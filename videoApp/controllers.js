@@ -8,7 +8,7 @@ app.controller('videoCenterController', ['$scope', 'videoService', function ($sc
 
   $scope.selectedVideo;
 
-  $scope.activeClass = 'active';
+  $scope.editTitle = false;
 
   videoService.GetVideos().then(function (data) {
     $scope.videos = data.data;
@@ -18,8 +18,7 @@ app.controller('videoCenterController', ['$scope', 'videoService', function ($sc
 
   $scope.onSelect = function(video) {
     $scope.selectedVideo = video;
-
-    console.log($scope.selectedVideo === video);
+    videoService.currentVideo = video;
   };
 
   $scope.applyClass = function(video) {
@@ -28,5 +27,25 @@ app.controller('videoCenterController', ['$scope', 'videoService', function ($sc
     } else {
       return '';
     }
+  };
+
+  $scope.onTitleClick = function() {
+    $scope.editTitle = true;
+  };
+
+  $scope.updateVideo = function() {
+    videoService.UpdateVideos($scope.selectedVideo).then(function (data) {
+      console.log(data);
+    }, function (e) {
+      console.log(e);
+    });
+  };
+
+  $scope.deleteVideo = function() {
+    videoService.DeleteVideo($scope.selectedVideo).then(function (data) {
+      console.log(data);
+    }, function (e) {
+      console.log(e);
+    });
   }
 }]);

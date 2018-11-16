@@ -3,9 +3,13 @@ app.directive('videoDetail', function () {
   return {
     restrict: 'E',
     templateUrl: 'directives/videoDetail.html',
-    replace: true,
+    /* replace: true, */
     scope: {
-      
+      videoObject: '=',
+      onTitleClick: '&',
+      updateVideo: '&',
+      deleteVideo: '&',
+      editTitle: '='
     }
   }
 });

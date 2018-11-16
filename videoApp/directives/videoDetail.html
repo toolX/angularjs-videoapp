@@ -1,19 +1,19 @@
-<div>
+<div ng-if="videoObject">
   <div>
-    <iframe width="100%" height="300"></iframe>
+    <iframe ng-src="{{ videoObject.url | trustURL }}" width="100%" height="300"></iframe>
   </div>
   <form>
-    <div class="form-group">
-      <input type="text" class="form-control" name="title" placeholder="title" required>
+    <div ng-if="editTitle" class="form-group">
+      <input ng-model="videoObject.title" type="text" class="form-control" name="title" placeholder="title" required>
     </div>
-    <h2>{{video.title}}</h2>
+    <h2 ng-if="!editTitle" ng-click="onTitleClick()">{{videoObject.title}}</h2>
     <div class="form-group">
-      <input type="text" class="form-control" name="url" placeholder="url" required>
+      <input ng-model="videoObject.url" type="text" class="form-control" name="url" placeholder="url" required>
     </div>
     <div class="form-group">
-      <textarea class="form-control" name="desc"></textarea>
+      <textarea ng-model="videoObject.description" class="form-control" name="desc"></textarea>
     </div>
-    <button class="btn btn-primary" type="button">Update</button>
-    <button class="btn btn-danger ml-3" type="button">Delete</button>
+    <button ng-click="updateVideo()" class="btn btn-primary" type="button">Update</button>
+    <button ng-click="deleteVideo()" class="btn btn-danger ml-3" type="button">Delete</button>
   </form>
 </div>
