@@ -12,6 +12,8 @@ app.controller('videoCenterController', ['$scope', 'videoService', function ($sc
 
   $scope.hideNewVideoForm = true;
 
+  $scope.isDisabled = false;
+
   videoService.GetVideos().then(function (data) {
     $scope.videos = data.data;
   }, function (e) {
@@ -63,16 +65,15 @@ app.controller('videoCenterController', ['$scope', 'videoService', function ($sc
   };
 
   $scope.addVideo = function(form) {
-    console.log($scope.selectedVideo);
     var newVideo = {};
     newVideo.title = form.title.$viewValue;
     newVideo.url = form.url.$viewValue;
     newVideo.description = form.description.$viewValue;
 
     videoService.AddVideo(newVideo).then(function (addedVideo) {
-      $scope.videos.push(addedVideo);
+      var videoArray = $scope.videos;
+      videoArray.push(addedVideo.data);
       $scope.selectedVideo = addedVideo.data;
-      console.log($scope.selectedVideo);
       $scope.hideNewVideoForm = true;
     }, function (e) {
       console.log(e);

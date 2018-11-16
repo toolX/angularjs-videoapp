@@ -5,17 +5,23 @@
       <form name="addVideoForm" ng-submit="addVideo(addVideoForm)" class="well" novalidate>
         <div class="form-group">
           <label for="title">Title</label>
-          <input ng-model="video.title" type="text" class="form-control" id="title" name="title" required>
+          <input ng-model="video.title" ng-class="{'is-invalid': addVideoForm.title.$invalid && addVideoForm.title.$touched}" type="text" class="form-control" id="title" name="title" required>
+          <div ng-show="addVideoForm.title.$invalid && addVideoForm.title.$touched">
+            <small class="text-danger" ng-class="{'d-none': addVideoForm.title.$valid && addVideoForm.title.$untouched}">Please add a title</small>
+          </div>
         </div>
         <div class="form-group">
           <label for="url">Url</label>
-          <input ng-model="video.url" type="text" class="form-control" id="url" name="url" required>
+          <input ng-model="video.url" ng-class="{'is-invalid': addVideoForm.url.$invalid && addVideoForm.url.$touched}" type="text" class="form-control" id="url" name="url" required>
+          <div ng-show="addVideoForm.url.$invalid && addVideoForm.url.$touched">
+            <small class="text-danger" ng-class="{'d-none': addVideoForm.url.$valid && addVideoForm.url.$untouched}">Please specify url</small>
+          </div>
         </div>
         <div class="form-group">
           <label for="description">Description</label>
           <input ng-model="video.description" type="text" class="form-control" id="description" name="description">
         </div>
-        <button class="btn btn-success" type="submit">Save</button>
+        <input ng-disabled="addVideoForm.$invalid" class="btn btn-success" type="submit" value="Save">
       </form>
     </div>
     <video-detail video-object="selectedVideo" on-title-click="onTitleClick()" update-video="updateVideo()" delete-video="deleteVideo()" edit-title="editTitle"></video-detail>
